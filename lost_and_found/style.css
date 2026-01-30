@@ -1,0 +1,38 @@
+body {
+    font-family: Arial;
+    background: #f4f6f8;
+    margin: 0;
+}
+
+header {
+    background: #1e90ff;
+    color: white;
+    padding: 15px;
+}
+
+.container {
+    padding: 20px;
+}
+
+li {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+.item-images {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+
+.item-images img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+

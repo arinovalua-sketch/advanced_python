@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="get" class="mb-4">
+    <select name="category" class="form-select w-25 d-inline">
+        <option value="">All categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothes">Clothes</option>
+        <option value="documents">Documents</option>
+        <option value="other">Other</option>
+    </select>
+    <button class="btn btn-outline-primary ms-2">Filter</button>
+</form>
+
+<h2 class="page-title">{{ page_title }}</h2>
+
+<div class="grid">
+    {% for item in items %}
+<div class="card shadow-sm">
+
+    <!-- IMAGE -->
+    {% if item.images.all %}
+<div class="item-images">
+    {% for img in item.images.all %}
+        <img src="{{ img.image.url }}" alt="item photo">
+    {% endfor %}
+</div>
+{% endif %}
+
+    <h5 class="fw-bold">{{ item.title }}</h5>
+
+    <!-- LOST / FOUND -->
+    {% if item.item_type == 'lost' %}
+        <span class="badge bg-danger mb-2">Lost</span>
+    {% else %}
+        <span class="badge bg-success mb-2">Found</span>
+    {% endif %}
+
+    <!-- CATEGORY -->
+    <p class="text-muted mb-1">
+        <strong>Category:</strong> {{ item.category }}
+    </p>
+
+    <!-- LOCATION -->
+    <p class="text-muted mb-2">
+        <strong>Location:</strong> {{ item.location }}
+    </p>
+
+    <!-- ACTION -->
+    {% if user.is_authenticated %}
+        <a href="/claim/{{ item.id }}/"
+           class="btn btn-outline-primary w-100">
+            Claim Item
+        </a>
+    {% else %}
+        <a href="/login/" class="btn btn-outline-secondary w-100">
+            Login to claim
+        </a>
+    {% endif %}
+
+</div>
+    {% empty %}
+        <p>No items found.</p>
+    {% endfor %}
+</div>
+{% if item.images.all %}
+<div class="mb-2">
+    {% for img in item.images.all %}
+        <img src="{{ img.image.url }}"
+             width="100"
+             class="me-2 rounded shadow-sm">
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
+

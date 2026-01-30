@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center mb-4">Add Item</h2>
+
+<form method="post"
+      enctype="multipart/form-data"
+      class="card p-4 shadow w-50 mx-auto">
+
+    {% csrf_token %}
+
+    <label>Title</label>
+    <input type="text" name="title" class="form-control mb-3" required>
+
+    <label>Description</label>
+    <textarea name="description" class="form-control mb-3" 
+required></textarea>
+
+    <label>Location</label>
+    <input type="text" name="location" class="form-control mb-3" 
+required>
+
+    <label>Item Type</label>
+    <select name="item_type" class="form-select mb-3">
+        <option value="found">Found</option>
+        <option value="lost">Lost</option>
+    </select>
+
+    <label>Category</label>
+    <select name="category" class="form-select mb-3">
+        <option value="electronics">Electronics</option>
+        <option value="clothes">Clothes</option>
+        <option value="documents">Documents</option>
+        <option value="other">Other</option>
+    </select>
+
+    <!-- 🔥 MULTIPLE IMAGES -->
+    <label>Photos</label>
+    <input type="file"
+           name="images"
+           class="form-control mb-3"
+           multiple>
+
+    <button class="btn btn-primary w-100">
+        Add Item
+    </button>
+</form>
+{% endblock %}
+
